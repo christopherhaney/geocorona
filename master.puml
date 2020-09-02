@@ -1,0 +1,187 @@
+@startuml
+'Window and WindowFactory'
+abstract class Window {
+    - windowImp : WindowImp
+    - rootGlyph : Glyph
+    + void drawCharacter(c : char, x: int, y : int)
+    + void drawRectangle(x: int, y : int, width : int, height : int)
+    + int charWidth(c : char)
+    + int charHeight(c : char)
+    + void setContents(glyph : Glyph)
+    + void addBorder(x1 : int, y1 : int, x2 : int, y2 : int, width : int)
+    + void addScrollBar(x : int, y : int, width : int, height : int)
+    + void drawButton(x : int, y : int, width : int, height : int, color : String)
+    + void drawLabel(x : int, y : int, width : int, height : int, color : String)
+    + void setRootGlyph(glyph : rootGlyph)
+    + void draw()
+}
+class ApplicationWindow extends Window
+WindowImp <-- Window
+interface WindowImp {
+    void drawCharacter(c : char, x : int, y : int)
+    void drawRectangle(x : int, y : int, width : int, height : int)
+    int charWidth(c : char)
+    int charHeight(c : char)
+    void setContents()
+    void addBorder(x1 : int, y1 : int, x2 : int, y2 : int, width : int)
+    void addScrollBar(x : int, y : int, width : int, height : int)
+    void drawButton(x : int, y : int, width : int, height : int, color : String)
+    void drawLabel(x : int, y : int, width : int, height : int, color : String)
+}
+class SwingWindow implements WindowImp {
+    - width : final int
+    - height : final int
+    - _window : Window
+    - _pane : Pane
+    - _jFrame : JFrame
+    - _graphics : Graphics
+    - _fm : FontMetrics
+    + void paintComponent(graphics : Graphics)
+}
+class AwtWindow implements WindowImp {
+    - width : final int
+        - height : final int
+        - _window : Window
+        - _pane : Pane
+        - _frame : FFrame
+        - _graphics : Graphics
+        - _fm : FontMetrics
+        + void Paint(graphics : Graphics)
+}
+abstract class WindowFactory {
+    - {static} uniqueInstance : WindowFactory
+    + {static} WindowFactory instance()
+    # {abstract} WindowImp windowFactoryMethod(title : String, window : Window)
+    + {abstract} WindowImp createWindowImp(title : String, window : Window)
+}
+WindowFactory <-- WindowFactory
+class SwingWindowFactory extends WindowFactory {
+    # SwingWindowFactory()
+}
+class AwtWindowFactory extends WindowFactory {
+    # AwtWindowFactory()
+}
+
+'Glyphs'
+abstract class Glyph {
+    - _parent : Glyph
+    - _bounds : Bounds
+    + {abstract} void draw(window : Window)
+    + Bounds getBounds()
+    + boolean intersects(point : Point)
+    + void insert(glyph : Glyph, position : int)
+    + void remove(glyph: Glyph)
+    + Glyph child(position : int)
+    + Glyph getParent()
+    + void setParent(glyph : Glyph)
+    + void composeRoot()
+    + void composeGlyph()
+    + void setChildPos(cursor : Bounds, child : Glyph)
+}
+class Character extends Glyph {
+    - c : char
+    + Character(c : char)
+}
+class Rectangle extends Glyph {
+    + Rectangle(rectX : int, rectY : int, rectWidth: int, rectHeight : int)
+}
+abstract class CompositeGlyph extends Glyph {
+    - _children : Vector<Glyph>
+    - currentChildIndex : int
+}
+abstract class Composition extends CompositeGlyph {
+    - _compositor : Compositor
+}
+class Row extends Composition {
+    + Row(window : Window)
+    + Row(string : String, window: Window)
+}
+class Column extends Composition {
+    + Column(window : Window)
+    + Column(strings : String[], window : Window)
+}
+abstract class Embellishment extends Composition {
+    - canInsert : boolean
+    + Embellishment(window : Window)
+}
+class Border extends Embellishment {
+    - thickness : int
+    + Border(window : Window, thickness : int)
+    - void drawBorder(window : Window)
+}
+class Scroller extends Embellishment {
+    - width : int
+    + Border(window : Window, width : int, height : int)
+    - void drawScroller(window : Window)
+}
+abstract class Compositor {
+    -_composition: Composition
+    -_window : Window
+    + Composition getComposition()
+    + void setComposition(composition : Composition)
+    + {abstract} void compose()
+    + void setWindow(window : Window)
+}
+class SimpleCompositor extends Compositor
+class Bounds {
+    - beginX : int
+    - endX : int
+    - beginY : int
+    - endY : int
+    - width : int
+    - height : int
+    + int getBeginX()
+    + int getEndX()
+    + int getBeginY()
+    + int getEndY()
+    + void setBeginX(beginX : int)
+    - void setEndX(endX : int)
+    + void setWidth(width : int)
+    + void setBeginY(beginY : int)
+    - void setEndY(endY : int)
+    + void setHeight(height : int)
+}
+
+Bounds <-- Glyph
+Compositor <-- Composition
+Composition <-- Compositor
+
+'GUIFactory'
+abstract class Button extends Embellishment
+abstract class Label extends Embellishment
+abstract class GUIFactory {
+    - {static} uniqueInstance : GUIFactory
+    + {static} instance()
+    # {abstract} Label labelFactoryMethod(window : Window)
+    + {final} Label createLabel(window : Window)
+    # {abstract} Button buttonFactoryMethod(window : Window)
+    + {final} Button createButton(window : Window)
+}
+GUIFactory <-- GUIFactory
+class GreenFactory extends GUIFactory {
+    # GreenFactory()
+}
+GreenButton *-- GreenFactory
+GreenLabel *-- GreenFactory
+class GreenButton extends Button
+class GreenLabel extends Label
+class RedFactory extends GUIFactory {
+    # RedFactory()
+}
+class RedButton extends Button
+class RedLabel extends Label
+RedButton *-- RedFactory
+RedLabel *-- RedFactory
+
+'Client'
+class Lexi {
+    - {static} guiFac : GUIFactory
+    - {static} windowFac : WindowFactory
+    + {static} void main(args : String[])
+}
+
+Window <-- Lexi
+WindowFactory <-- Lexi
+GUIFactory <-- Lexi
+
+@enduml
