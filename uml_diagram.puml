@@ -1,0 +1,7 @@
+@startuml geocorona
+"app-root" *-- "app-nav-bar"
+"app-root" *-- "app-map-detail-container"
+"app-map-detail-container" *-- "app-us-map"
+"app-map-detail-container" *-- "app-us-state-pop-up"
+"app-root" *-- "app-about"
+@enduml
