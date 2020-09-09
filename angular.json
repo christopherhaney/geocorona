@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "geocorona"
+    }
+  },
+  "defaultProject": "geocorona",
+  "cli": {
+    "analytics": "2b845b34-8203-49d6-a176-d41f14323885"
+  }
 }
