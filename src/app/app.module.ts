@@ -8,6 +8,8 @@ import { UsMapComponent } from './map-detail/us-map/us-map.component';
 import { UsStatePopUpComponent } from './map-detail/us-state-pop-up/us-state-pop-up.component';
 import { AboutComponent } from './about/about.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxCsvParserModule } from 'ngx-csv-parser';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    NgxCsvParserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
