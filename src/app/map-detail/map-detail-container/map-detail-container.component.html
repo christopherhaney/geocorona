@@ -4,6 +4,12 @@
 <h2> Positive cases for each state</h2>
 <div *ngFor="let state of stateRecords">
     <div class="state_info">
-        <h3>{{state.state}} {{state.positive}}</h3>
+        <ul>
+            <ul><h3>{{state.state}}</h3></ul>
+            <ul><h3>Total Tests: {{state.totalTestResults}}</h3></ul>
+            <ul><h3>Positive: {{state.positive}}</h3></ul>
+            <ul><h3>Deaths: {{state.death}}</h3></ul>
+            <ul><h3>Recovered: {{state.recovered}}</h3></ul>
+        </ul>
     </div>
 </div>
