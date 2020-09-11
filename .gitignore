@@ -6,3 +6,6 @@ node_modules/
 
 # Files
 package-lock.json
+
+# Webstorm
+.idea/
