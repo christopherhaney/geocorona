@@ -12,12 +12,12 @@ export class MapDetailContainerComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
-    const promises = [
+    const dataFetched = [
       fetch(this.data.covid_data).then(handleHttpResponse),
       await d3.json('../../../assets/geoData.json')
     ];
 
-    Promise.all(promises)
+    Promise.all(dataFetched)
         .then(mergeData)
         .then(drawMap);
   }
@@ -79,7 +79,7 @@ function drawMap(regions): void {
       .attr('height', width / 2)
       .selectAll('path')
       .data(regions)
-      .enter()
+    .enter()
       .append('path')
       .attr('d', borders)
       .attr('class', 'region')
