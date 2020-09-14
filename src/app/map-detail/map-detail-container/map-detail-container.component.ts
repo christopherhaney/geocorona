@@ -69,8 +69,8 @@ function drawMap(regions): void {
   const projection = d3.geoAlbersUsa().scale(1000);
   const borders = d3.geoPath().projection(projection);
 
-  const maxCases: string = d3.max(regions, ({stats}) => stats.positiveCasesViral);
-  const colors = d3.scaleSequential(d3.interpolateRdYlGn).domain([Number(maxCases), 0]);
+  const maxCases: number = d3.max(regions, ({stats}): number => stats.positiveCasesViral);
+  const colors = d3.scaleSequential(d3.interpolateRdYlGn).domain([maxCases, 0]);
 
   // in d3 its convention to un-indent functions that change the data, like .enter()
   d3.select('#the-map')
