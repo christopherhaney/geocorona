@@ -57,6 +57,14 @@ function handleHttpResponse(resp: Response): Promise<any> {
   }
 }
 
+function showRegionStats(event, d: any): void {
+  const cases = d.stats.positiveCasesViral;
+  const state = d.properties.NAME;
+  const value = cases === null ? 'No Data Provided' : cases;
+  d3.select('#region-stats').text(`${state}: ${value}`);
+}
+
+
 /**
  * Draws the map using dataset of merged covid stats and geography data.
  * @param regions The merged covid stats and geography data.
@@ -83,5 +91,10 @@ function drawMap(regions): void {
       .append('path')
       .attr('d', borders)
       .attr('class', 'region')
-      .style('fill', ({stats}) => colors(stats.positiveCasesViral));
+      .on('mouseover', showRegionStats)
+      .style('fill', ({stats}) => {
+        const cases = stats.positiveCasesViral;
+        const gray = 'rgb(55, 55, 55)';
+        return cases === null ? gray : colors(cases);
+      });
 }
