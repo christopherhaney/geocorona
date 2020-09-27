@@ -1,15 +1,13 @@
 <html>     
     <div *ngIf="loaded; else loadingScreen">
-        <div class="home">
-            <p>Track the big rona with the following Angular components...</p>
-            <app-nav-bar></app-nav-bar>
-            <app-map-detail-container></app-map-detail-container>
-            <router-outlet></router-outlet>
-            <div class="background">
-                <video autoplay muted loop id="myVideo">
-                    <source src="./../assets/background/Earth.mp4" type="video/mp4">
-                </video> 
-            </div>
+        <p>Track the big rona with the following Angular components...</p>
+        <app-nav-bar></app-nav-bar>
+        <app-map-detail-container></app-map-detail-container>
+        <router-outlet></router-outlet>
+        <div class="background">
+            <video autoplay muted loop id="myVideo">
+                <source src="./../assets/background/Earth.mp4" type="video/mp4">
+            </video> 
         </div>
     </div>
 
