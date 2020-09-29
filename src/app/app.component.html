@@ -1,8 +1,13 @@
 <div *ngIf="loaded; else loadingScreen">
-    Track the big rona with the following Angular components...
+    <p>Track the big rona with the following Angular components...</p>
     <app-nav-bar></app-nav-bar>
     <app-usa-map></app-usa-map>
     <router-outlet></router-outlet>
+    <div class="background">
+        <video autoplay muted loop id="myVideo" (mouseover)="playBackRate()">
+            <source src="./../assets/background/Earth.mp4" type="video/mp4">
+        </video> 
+    </div>
 </div>
 
 <ng-template #loadingScreen>
