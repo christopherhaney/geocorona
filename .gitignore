@@ -5,7 +5,7 @@ node_modules/
 .DS_Store
 
 # Files
-package-lock.json
+# package-lock.json
 
 # Webstorm
 .idea/
