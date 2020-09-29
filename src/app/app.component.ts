@@ -13,5 +13,10 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       this.loaded = true; // TODO set loaded after d3 has loaded, not just an arbitrary time
     }, 3000);
+    
+  }
+
+  playBackRate() {
+    (<HTMLVideoElement>document.getElementById("myVideo")).playbackRate = 1;
   }
 }
