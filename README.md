@@ -17,3 +17,7 @@ Developed by [Chris Haney](https://christopherhaney.github.io/), [Benjamin Clark
 2. Run `npm install` to install all necessary modules.
 
 3. Run `ng serve` to compile and locally host the application. Navigate to http://localhost:4200/ in your web browser of choice and enjoy! The app will automatically reload if you change any of the source files.
+
+## Learn More:
+
+[Read the geocorona Development Blog!](https://christopherhaney.github.io/posts/geocorona)
