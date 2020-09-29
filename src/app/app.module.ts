@@ -5,10 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapDetailContainerComponent } from './map-detail/map-detail-container/map-detail-container.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
+import { MatTabsModule } from '@angular/material/tabs';
 import { UsMapComponent } from './map-detail/us-map/us-map.component';
 import { UsStatePopUpComponent } from './map-detail/us-state-pop-up/us-state-pop-up.component';
 import { AboutComponent } from './about/about.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxCsvParserModule } from 'ngx-csv-parser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,7 +20,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UsMapComponent,
     UsStatePopUpComponent,
     AboutComponent,
-    NavBarComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     NgxCsvParserModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
