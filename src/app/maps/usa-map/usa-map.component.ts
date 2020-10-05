@@ -9,12 +9,12 @@ import {CovidMap} from '../../services/map-service/map.service';
 })
 export class UsaMapComponent implements OnInit {
 
-  constructor(data: DataService) {
-    const map = new CovidMap(data);
+  constructor(private data: DataService) {
+
   }
 
   ngOnInit(): void {
-
+    const map = new CovidMap(this.data, '#the-tooltip');
   }
 
 
