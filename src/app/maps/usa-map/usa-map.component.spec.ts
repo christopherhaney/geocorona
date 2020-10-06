@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UsaMapComponent } from './usa.component';
+import { UsaMapComponent } from './usa-map.component';
 
 describe('UsaComponent', () => {
   let component: UsaMapComponent;
