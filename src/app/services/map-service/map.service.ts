@@ -4,17 +4,40 @@ import {DataService} from '../data-service/data.service';
 
 export class CovidMap {
     private map: d3.Selection<any, any, any, any>;
+    private tooltip: d3.Selection<any, any, any, any>;
 
-    constructor(private dataService: DataService, private width = 1000) {
+    constructor(private dataService: DataService, tooltipSelector: string, private width = 1000) {
+        this.tooltip = d3.select(tooltipSelector);
         this.dataService.pull()
             .then(this.create)
             .then(this.update);
     }
     private mouseOver = (e: MouseEvent, d: any): void => {
-        d3.select(e.target as Element)
-            .style('stroke', 'red');
+        console.log(d);
+
+        this.tooltip
+            .select('p.title')
+            .text(d.properties.NAME);
+
+        this.tooltip
+            .select('p.subtitle')
+            .text(d.stats.positive);
+
+        this.tooltip
+            .style('visibility', 'visible');
+
     }
+
+    private mouseMove = (e: MouseEvent, d: any): void => {
+
+        // follow the mouse
+        this.tooltip
+            .style('top', `${e.pageY - 10}px`)
+            .style('left', `${e.pageX + 10}px`);
+    }
+
     private mouseOut = (e: MouseEvent, d: any): void => {
+        this.tooltip.style('visibility', 'hidden');
         d3.select(e.target as Element)
             .transition()
             .style('stroke', 'gray');
@@ -44,10 +67,12 @@ export class CovidMap {
     }
 
     public update = (regions): void => {
-        const projection: d3.GeoProjection = d3.geoAlbersUsa().scale(1000);
-        const borders: d3.GeoPath = d3.geoPath().projection(projection);
-        const maxCases: number = d3.max(regions, ({stats}): number => stats.positiveCasesViral);
-        const colors: d3.ScaleSequential<string> = d3.scaleSequential(d3.interpolateRdYlGn).domain([maxCases, 0]);
+
+        const projection = d3.geoAlbersUsa().scale(1000);
+        const borders = d3.geoPath().projection(projection);
+
+        const maxCases = d3.max(regions, ({stats}): number => stats.positive);
+        const colors = d3.scaleSequential(d3.interpolateRdYlGn).domain([maxCases, 0]);
 
         // do these things for each new piece of data that
         // enters our existing data set that we don't already have
@@ -56,12 +81,11 @@ export class CovidMap {
             .attr('d', borders)
             .attr('class', 'region')
             .on('mouseover', this.mouseOver)
+            .on('mousemove', this.mouseMove)
             .on('mouseout', this.mouseOut)
             .style('stroke', 'gray')
             .style('fill', ({stats}) => {
-                const cases = stats.positiveCasesViral;
-                const gray = 'rgb(55, 55, 55)';
-                return cases === null ? gray : colors(cases);
+                return stats.positive === null ? 'rgb(55, 55, 55)' : colors(stats.positive);
             });
 
         // do these things for each piece of data that
@@ -71,23 +95,4 @@ export class CovidMap {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
