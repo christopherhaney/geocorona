@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "9"
+- "14.9.0"
 dist: trusty
 sudo: required
 
@@ -9,7 +9,7 @@ branches:
   - master
   
 before_script:
-- npm run build --if-present
+- npm install -g @angular/cli
 
 script:
 - npm run test-headless
