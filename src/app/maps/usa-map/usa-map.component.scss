@@ -1,0 +1,17 @@
+
+#the-tooltip {
+  background-color: #c6cbce;
+  padding: 0.5em;
+  border-radius: 5px;
+  border: 1px solid #7d7d7d;
+  position: absolute;
+  z-index: 10;
+  visibility: hidden;
+}
+
+#the-tooltip p.title {
+  font-size: 1.5em;
+  line-height: 0;
+  font-weight: bold;
+}
+
