@@ -1,8 +1,12 @@
 <div *ngIf="loaded; else loadingScreen">
-    <p>Track the big rona with the following Angular components...</p>
-    <app-nav-bar></app-nav-bar>
-    <app-usa-map></app-usa-map>
-    <router-outlet></router-outlet>
+    <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+        <mat-tab label="Map" class="tabLabel">
+            <app-usa-map></app-usa-map>
+        </mat-tab>
+        <mat-tab label="About" class="tabLabel">
+            Hello!
+        </mat-tab>
+    </mat-tab-group>
     <div class="background">
         <video autoplay muted loop id="myVideo" (mouseover)="playBackRate()">
             <source src="./../assets/background/Earth.mp4" type="video/mp4">

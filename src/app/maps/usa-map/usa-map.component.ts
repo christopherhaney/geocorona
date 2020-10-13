@@ -5,7 +5,7 @@ import {CovidMap} from '../../services/map-service/map.service';
 @Component({
   selector: 'app-usa-map',
   templateUrl: './usa-map.component.html',
-  styleUrls: ['./usa-map.component.sass']
+  styleUrls: ['./usa-map.component.scss']
 })
 export class UsaMapComponent implements OnInit {
 
