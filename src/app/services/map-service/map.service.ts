@@ -4,26 +4,31 @@ import {DataService} from '../data-service/data.service';
 
 export class CovidMap {
     private map: d3.Selection<any, any, any, any>;
-    private tooltip: d3.Selection<any, any, any, any>;
+    // private tooltip: d3.Selection<any, any, any, any>;
 
-    constructor(private dataService: DataService, tooltipSelector: string, private width = 1000) {
-        this.tooltip = d3.select(tooltipSelector);
+    constructor(private dataService: DataService, private tooltipSelector: string, private width = 1000) {
+        // this.tooltip = d3.select(tooltipSelector);
         this.dataService.pull()
             .then(this.create)
             .then(this.update);
     }
+
+    private tooltip(): d3.Selection<any, any, any, any> {
+        return d3.select(this.tooltipSelector);
+    }
+
     private mouseOver = (e: MouseEvent, d: any): void => {
         console.log(d);
 
-        this.tooltip
+        this.tooltip()
             .select('p.title')
             .text(d.properties.NAME);
 
-        this.tooltip
+        this.tooltip()
             .select('p.subtitle')
             .text(d.stats.positive);
 
-        this.tooltip
+        this.tooltip()
             .style('visibility', 'visible');
 
     }
@@ -31,13 +36,13 @@ export class CovidMap {
     private mouseMove = (e: MouseEvent, d: any): void => {
 
         // follow the mouse
-        this.tooltip
-            .style('top', `${e.pageY - 10}px`)
-            .style('left', `${e.pageX + 10}px`);
+        this.tooltip()
+            .style('top', `${e.pageY - 20}px`)
+            .style('left', `${e.pageX - 20}px`);
     }
 
     private mouseOut = (e: MouseEvent, d: any): void => {
-        this.tooltip.style('visibility', 'hidden');
+        this.tooltip().style('visibility', 'hidden');
         d3.select(e.target as Element)
             .transition()
             .style('stroke', 'gray');
