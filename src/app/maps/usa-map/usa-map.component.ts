@@ -16,6 +16,4 @@ export class UsaMapComponent implements OnInit {
   ngOnInit(): void {
     const map = new CovidMap(this.data, '#the-tooltip');
   }
-
-
 }
