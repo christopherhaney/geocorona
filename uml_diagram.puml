@@ -1,7 +1,10 @@
 @startuml geocorona
-"app-root" *-- "app-nav-bar"
-"app-root" *-- "app-map-detail-container"
-"app-map-detail-container" *-- "app-us-map"
-"app-map-detail-container" *-- "app-us-state-pop-up"
-"app-root" *-- "app-about"
+[App] - [NavBar]
+[NavBar] - Map
+[NavBar] - [About]
+package "Map" {
+    [DataService] ..> COVID_API_URL : gets
+    [DataService] - [MapService] : feeds
+    [MapService] - [UsaMap] : generates
+}
 @enduml
