@@ -8,7 +8,7 @@ import * as d3 from 'd3';
 export class DataService {
 
   private covidUrl = 'https://api.covidtracking.com/v1/states/current.json';
-  private USAStateGeoUrl = '../../../assets/USA_State_Geography.json';
+  private USAStateGeoUrl = 'assets/USA_State_Geography.json';
 
   constructor() { }
 
