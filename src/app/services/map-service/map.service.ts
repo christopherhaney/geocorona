@@ -35,8 +35,9 @@ export class CovidMap {
 
     private getTooltipContent(stateName: string, stats: any): string {
 
-        const positiveIncrease = stats.positiveIncrease ? `(${stats.positiveIncrease.toLocaleString()} increase)` : '';
-        const deathIncrease = stats.deathIncrease ? `(${stats.deathIncrease.toLocaleString()} increase)` : '';
+        // some values are null, and trying to add commas via toLocaleString will break things.
+        const pretty = (value) => value ? value.toLocaleString() : 0;
+        const increase = (value, other = 'increase') => value ? `(${value.toLocaleString()} ${other})` : '';
 
         return `
             <p style="font-size: 2em; line-height: 0;">${stateName}</p>
@@ -44,15 +45,15 @@ export class CovidMap {
             <table>
                 <tr>
                     <td style="white-space: nowrap; text-align: right; color: cornflowerblue;">Positive Cases:</td>
-                    <td>${stats.positive.toLocaleString()} ${positiveIncrease.toLocaleString()}</td>
+                    <td>${pretty(stats.positive)} ${increase(stats.positiveIncrease)}</td>
                 </tr>
                 <tr>
                     <td style="text-align: right; color: cornflowerblue;">Hospitalized:</td>
-                    <td>${stats.hospitalizedCurrently.toLocaleString()} (${stats.inIcuCurrently.toLocaleString()} in ICU)</td>
+                    <td>${pretty(stats.hospitalizedCurrently)} ${increase(stats.inIcuCurrently, 'in ICU')}</td>
                 </tr>
                 <tr>
                     <td style="text-align: right; color: cornflowerblue;">Deaths:</td>
-                    <td>${stats.death.toLocaleString()} ${deathIncrease}</td>
+                    <td>${pretty(stats.death)} ${increase(stats.deathIncrease)}</td>
                 </tr>
             </table>
 
