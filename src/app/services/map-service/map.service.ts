@@ -43,15 +43,15 @@ export class CovidMap {
 
             <table>
                 <tr>
-                    <td style="white-space: nowrap; text-align: right; color: yellow;">Positive Cases:</td>
+                    <td style="white-space: nowrap; text-align: right; color: cornflowerblue;">Positive Cases:</td>
                     <td>${stats.positive.toLocaleString()} ${positiveIncrease.toLocaleString()}</td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; color: yellow;">Hospitalized:</td>
+                    <td style="text-align: right; color: cornflowerblue;">Hospitalized:</td>
                     <td>${stats.hospitalizedCurrently.toLocaleString()} (${stats.inIcuCurrently.toLocaleString()} in ICU)</td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; color: yellow;">Deaths:</td>
+                    <td style="text-align: right; color: cornflowerblue;">Deaths:</td>
                     <td>${stats.death.toLocaleString()} ${deathIncrease}</td>
                 </tr>
             </table>
