@@ -37,7 +37,16 @@ export class CovidMap {
 
         // some values are null, and trying to add commas via toLocaleString will break things.
         const pretty = (value) => value ? value.toLocaleString() : 0;
-        const increase = (value, other = 'increase') => value ? `(${value.toLocaleString()} ${other})` : '';
+        const extra = (value, other) => value ? `(${value.toLocaleString()} ${other})` : '';
+
+        const s = {
+            inICU: extra(stats.inIcuCurrently, 'in ICU'),
+            deaths: pretty(stats.death),
+            positive: pretty(stats.positive),
+            deathIncrease: extra(stats.deathIncrease, 'increase'),
+            hospitalized: pretty(stats.hospitalizedCurrently),
+            positiveIncrease: extra(stats.positiveIncrease, 'increase'),
+        };
 
         return `
             <p style="font-size: 2em; line-height: 0;">${stateName}</p>
@@ -45,15 +54,15 @@ export class CovidMap {
             <table>
                 <tr>
                     <td style="white-space: nowrap; text-align: right; color: cornflowerblue;">Positive Cases:</td>
-                    <td>${pretty(stats.positive)} ${increase(stats.positiveIncrease)}</td>
+                    <td>${s.positive} ${s.positiveIncrease}</td>
                 </tr>
                 <tr>
                     <td style="text-align: right; color: cornflowerblue;">Hospitalized:</td>
-                    <td>${pretty(stats.hospitalizedCurrently)} ${increase(stats.inIcuCurrently, 'in ICU')}</td>
+                    <td>${s.hospitalized} ${s.inICU}</td>
                 </tr>
                 <tr>
                     <td style="text-align: right; color: cornflowerblue;">Deaths:</td>
-                    <td>${pretty(stats.death)} ${increase(stats.deathIncrease)}</td>
+                    <td>${s.deaths} ${s.deathIncrease}</td>
                 </tr>
             </table>
 
