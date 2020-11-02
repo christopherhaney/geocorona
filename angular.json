@@ -32,7 +32,7 @@
               "./node_modules/tippy.js/dist/tippy.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": ["src/app/game/asteroids.js"]
           },
           "configurations": {
             "production": {

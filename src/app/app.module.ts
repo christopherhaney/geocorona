@@ -10,12 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxCsvParserModule } from 'ngx-csv-parser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsaMapComponent } from './maps/usa-map/usa-map.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
-    UsaMapComponent
+    UsaMapComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
