@@ -1,6 +1,10 @@
 import * as d3 from 'd3';
 import {DataService} from '../data-service/data.service';
 
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/animations/scale.css';
+import 'tippy.js/animations/scale-subtle.css';
 
 export class CovidMap {
     private map: d3.Selection<any, any, any, any>;
@@ -13,45 +17,61 @@ export class CovidMap {
             .then(this.update);
     }
 
-    private tooltip(): d3.Selection<any, any, any, any> {
-        return d3.select(this.tooltipSelector);
-    }
+    // private tooltip(): d3.Selection<any, any, any, any> {
+    //     return d3.select(this.tooltipSelector);
+    // }
 
     private mouseOver = (e: MouseEvent, d: any): void => {
         console.log(d);
+        const selector = '#' + d.stats.state.toLowerCase();
 
-        this.tooltip()
-            .select('p.title')
-            .text(d.properties.NAME);
-
-        this.tooltip()
-            .select('p.subtitle')
-            .text(d.stats.positive);
-
-        this.tooltip()
-            .style('visibility', 'visible');
+        // all tippy options: https://atomiks.github.io/tippyjs/v6/all-props/
+        tippy(selector, {
+            allowHTML: true,  // because our tippy content has html inside
+            content: this.getTooltipContent(d.properties.NAME, d.stats),
+        });
 
     }
 
-    private mouseMove = (e: MouseEvent, d: any): void => {
+    private getTooltipContent(stateName: string, stats: any): string {
 
-        // follow the mouse
-        this.tooltip()
-            .style('top', `${e.pageY - 20}px`)
-            .style('left', `${e.pageX - 20}px`);
+        // some values are null, and trying to add commas via toLocaleString will break things.
+        const pretty = (value) => value ? value.toLocaleString() : 0;
+        const extra = (value, other) => value ? `(${value.toLocaleString()} ${other})` : '';
+
+        const s = {
+            inICU: extra(stats.inIcuCurrently, 'in ICU'),
+            deaths: pretty(stats.death),
+            positive: pretty(stats.positive),
+            deathIncrease: extra(stats.deathIncrease, 'increase'),
+            hospitalized: pretty(stats.hospitalizedCurrently),
+            positiveIncrease: extra(stats.positiveIncrease, 'increase'),
+        };
+
+        return `
+            <p style="font-size: 2em; line-height: 0;">${stateName}</p>
+
+            <table>
+                <tr>
+                    <td style="white-space: nowrap; text-align: right; color: cornflowerblue;">Positive Cases:</td>
+                    <td>${s.positive} ${s.positiveIncrease}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right; color: cornflowerblue;">Hospitalized:</td>
+                    <td>${s.hospitalized} ${s.inICU}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right; color: cornflowerblue;">Deaths:</td>
+                    <td>${s.deaths} ${s.deathIncrease}</td>
+                </tr>
+            </table>
+
+            <p style="font-size: 0.8em; color: #999;">
+                Updated ${stats.lastUpdateEt} EST (quality: ${stats.dataQualityGrade})
+            </p>
+        `;
+
     }
-
-    private mouseOut = (e: MouseEvent, d: any): void => {
-        this.tooltip().style('visibility', 'hidden');
-        d3.select(e.target as Element)
-            .transition()
-            .style('stroke', 'gray');
-    }
-
-    // public refreshData(): void {
-    //     console.log('refreshing the map data');
-    //     this.dataService.pull().then(this.update);
-    // }
 
     /**
      * Create the svg, all the regions, and bind our pulled data to each region
@@ -81,13 +101,16 @@ export class CovidMap {
 
         // do these things for each new piece of data that
         // enters our existing data set that we don't already have
+
         this.map.enter()
             .append('path')
             .attr('d', borders)
             .attr('class', 'region')
+            // .attr('data-tippy-content', 'tooltip')
             .on('mouseover', this.mouseOver)
-            .on('mousemove', this.mouseMove)
-            .on('mouseout', this.mouseOut)
+            // .on('mousemove', this.mouseMove)
+            // .on('mouseout', this.mouseOut)
+            .attr('id', ({stats}) => stats.state.toLowerCase())
             .style('stroke', 'gray')
             .style('fill', ({stats}) => {
                 return stats.positive === null ? 'rgb(55, 55, 55)' : colors(stats.positive);
