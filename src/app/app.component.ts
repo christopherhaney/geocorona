@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs/tab-group';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,9 @@ export class AppComponent implements OnInit {
     }, 3);
   }
 
-  public pauseVideo(event: Event) {
-    console.log("I work");
+  public videoEvent(tabChangeEvent: MatTabChangeEvent) {
     var vid = <HTMLVideoElement>(document.getElementById("myVideo"));
-    vid.pause();
+    if(tabChangeEvent.index == 2) { vid.pause(); } 
+    else { vid.play(); }
   }
 }

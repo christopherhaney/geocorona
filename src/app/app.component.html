@@ -1,5 +1,5 @@
 <div *ngIf="loaded; else loadingScreen">
-    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" >
+    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedTabChange)="videoEvent($event)">
         <mat-tab label="Map" class="tabLabel">
             <app-usa-map></app-usa-map>
         </mat-tab>
