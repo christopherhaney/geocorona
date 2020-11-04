@@ -8,12 +8,13 @@ let bullets = [];
 let asteroids = [];
 let score = 0;
 let lives = 3;
+let game_over = 0;
  
 // HOMEWORK SOLUTION - Contributed by luckyboysunday
 let highScore;
 let localStorageName = "HighScore";
  
-document.addEventListener('DOMContentLoaded', SetupCanvas);
+document.addEventListener('click', restart);
  
 function SetupCanvas(){
     canvas = document.getElementById("my-canvas");
@@ -22,9 +23,10 @@ function SetupCanvas(){
     canvas.height = canvasHeight;
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     ship = new Ship();
  
-    for(let i = 0; i < 8; i++){
+    for(let i = 0; i < 10; i++){
         asteroids.push(new Asteroid());
     }
  
@@ -140,7 +142,7 @@ class Ship {
         ctx.stroke();
         var img = new Image();
         img.src = this.virus;
-        ctx.drawImage(img, this.x-10, this.y-25, 50, 50);
+        ctx.drawImage(img, this.x-10, this.y-25, 45, 45);
     }
 }
  
@@ -162,8 +164,11 @@ class Bullet{
         this.y -= Math.sin(radians) * this.speed;
     }
     Draw(){
-        ctx.fillStyle = 'white';
-        ctx.fillRect(this.x,this.y,this.width,this.height);
+        // ctx.fillStyle = 'white';
+        // ctx.fillRect(this.x,this.y,this.width,this.height);
+        var img = new Image();
+        img.src = "../game_images/covid.png";
+        ctx.drawImage(img, this.x, this.y, 10, 10);
     }
 }
  
@@ -285,6 +290,7 @@ function Render() {
         ctx.fillStyle = 'white';
         ctx.font = '50px Arial';
         ctx.fillText("GAME OVER", canvasWidth / 2 - 150, canvasHeight / 2);
+        game_over = 1;
     }
  
     // HOME WORK SOLUTION : Creates a new level and increases asteroid speed
@@ -370,4 +376,25 @@ loop1:
     ctx.fillText("HIGH SCORE : " + highScore.toString(), 20, 70);
  
     requestAnimationFrame(Render);
+}
+
+function hideStart() {
+    document.getElementById("s").style = "display: none;";
+}
+
+function restart() {
+    if(game_over == 1) {
+        keys = [];
+        bullets = [];
+        asteroids = [];
+        score = 0;
+        lives = 3;
+        game_over = 0;
+        ship = new Ship();
+        for(let i = 0; i < 10; i++){
+            asteroids.push(new Asteroid());
+        }
+    document.body.addEventListener("keydown", HandleKeyDown);
+    document.body.addEventListener("keyup", HandleKeyUp);
+    }
 }

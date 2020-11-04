@@ -8,3 +8,11 @@ body{
 #my-canvas {
     background: #000;
 }
+.start {
+    text-align: center;
+    cursor: pointer;
+}
+.start h1 {
+    margin-top: 500;
+    color: white;
+}
