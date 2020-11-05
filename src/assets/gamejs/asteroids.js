@@ -290,6 +290,7 @@ function Render() {
         ctx.fillStyle = 'white';
         ctx.font = '50px Arial';
         ctx.fillText("GAME OVER", canvasWidth / 2 - 150, canvasHeight / 2);
+        ctx.fillText("CLICK TO RESTART", canvasWidth / 2 - 230, canvasHeight / 2 + 100);
         game_over = 1;
     }
  

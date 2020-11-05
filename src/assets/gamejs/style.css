@@ -13,6 +13,7 @@ body{
     cursor: pointer;
 }
 .start h1 {
+    font-style: "Arial";
     margin-top: 500;
     color: white;
 }
