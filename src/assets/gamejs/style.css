@@ -1,0 +1,19 @@
+body{
+    background: #000;
+}
+#container {
+    max-width: 1400px;
+    margin: auto;
+}
+#my-canvas {
+    background: #000;
+}
+.start {
+    text-align: center;
+    cursor: pointer;
+}
+.start h1 {
+    font-style: "Arial";
+    margin-top: 500;
+    color: white;
+}
