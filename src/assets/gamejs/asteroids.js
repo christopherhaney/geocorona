@@ -142,7 +142,7 @@ class Ship {
         ctx.stroke();
         var img = new Image();
         img.src = this.virus;
-        ctx.drawImage(img, this.x-10, this.y-25, 45, 45);
+        ctx.drawImage(img, this.x-20, this.y-20, 40, 40);
     }
 }
  
