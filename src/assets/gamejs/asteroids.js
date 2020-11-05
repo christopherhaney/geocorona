@@ -74,10 +74,10 @@ class Ship {
         this.x = canvasWidth / 2;
         this.y = canvasHeight / 2;
         this.movingForward = false;
-        this.speed = 0.1;
+        this.speed = 0.1 + 0.1;
         this.velX = 0;
         this.velY = 0;
-        this.rotateSpeed = 0.001;
+        this.rotateSpeed = 0.001 + 0.001;
         this.radius = 15;
         this.angle = 0;
         this.virus = "../game_images/covid.png";
@@ -177,7 +177,7 @@ class Asteroid{
         this.visible = true;
         this.x = x || Math.floor(Math.random() * canvasWidth);
         this.y = y || Math.floor(Math.random() * canvasHeight);
-        this.speed = 3;
+        this.speed = 3 + 2;
         this.radius = radius || 50;
         this.angle = Math.floor(Math.random() * 359);
         this.strokeColor = 'white';
