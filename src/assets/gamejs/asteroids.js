@@ -80,7 +80,7 @@ class Ship {
         this.rotateSpeed = 0.001 + 0.001;
         this.radius = 15;
         this.angle = 0;
-        this.virus = "assets/game_images/covid.png";
+        this.virus = "../game_images/covid.png";
         this.strokeColor = 'white';
         // Used to know where to fire the bullet from
         this.noseX = canvasWidth / 2 + 15;
@@ -167,7 +167,7 @@ class Bullet{
         // ctx.fillStyle = 'white';
         // ctx.fillRect(this.x,this.y,this.width,this.height);
         var img = new Image();
-        img.src = "assets/game_images/covid.png";
+        img.src = "../game_images/covid.png";
         ctx.drawImage(img, this.x, this.y, 10, 10);
     }
 }
@@ -212,7 +212,7 @@ class Asteroid{
         // ctx.closePath();
         // ctx.stroke();
         var img = new Image();
-        img.src = "assets/game_images/fauci.png";
+        img.src = "../game_images/fauci.png";
         ctx.drawImage(img, this.x-this.radius, this.y-this.radius, this.radius*2, this.radius*2);
     }
 }
