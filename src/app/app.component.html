@@ -1,14 +1,14 @@
 <div *ngIf="loaded; else loadingScreen">
     <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedTabChange)="videoEvent($event)">
-        <mat-tab label="Map" class="tabLabel">
+        <mat-tab label="Map">
             <app-usa-map></app-usa-map>
         </mat-tab>
-        <mat-tab  label="About" class="tabLabel">
-           <app-about></app-about>
-        </mat-tab>
-        <mat-tab label="Game" class="tabLabel">
+        <mat-tab label="Game">
             <app-game></app-game>
         </mat-tab>
+        <mat-tab label="About the Developers">
+            <app-about></app-about>
+         </mat-tab>
     </mat-tab-group>
     <div class="background">
         <video autoplay muted loop id="myVideo">

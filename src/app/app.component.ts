@@ -13,13 +13,13 @@ export class AppComponent implements OnInit {
   
   ngOnInit() {
     setTimeout(() => {
-      this.loaded = true; // TODO set loaded after d3 has loaded, not just an arbitrary time
+      this.loaded = true;
     }, 3);
   }
 
   public videoEvent(tabChangeEvent: MatTabChangeEvent) {
     var vid = <HTMLVideoElement>(document.getElementById("myVideo"));
-    if(tabChangeEvent.index == 2) { vid.pause(); } 
+    if(tabChangeEvent.index == 1) { vid.pause(); } 
     else { vid.play(); }
   }
 }
