@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  benParagraph = "Write about yourself in the benParagraph string in about.component.ts!"
+  benParagraph = "Benjamin Clark is a recent graduate with a Bachelor's in Computer Science from Boise State University."
+  + "Ben currently works at Y STEM and Chess Inc as a front-end team lead intern."
+  + "In his free time he likes to read books, skateboard, and exercise."
 
   chrisParagraph = "Chris Haney is a recent graduate with a Bachelor's in Computer Science from Boise State University. "
   + "He currently works at Micron Technology as a software engineer. "
