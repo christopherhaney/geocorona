@@ -15,7 +15,8 @@ export class AboutComponent implements OnInit {
   + "He currently works at Micron Technology as a software engineer. "
   + "He likes to DJ and play Super Smash Bros. Ultimate in his spare time!"
 
-  rossParagraph = "Write about yourself in the rossParagraph string in about.component.ts!"
+  rossParagraph = "Ross is also a recent Computer Science BS graduate from Boise State University." +
+                  "He currently works at HP as a software engineer and likes art, watching movies, and robots."
 
   devList = [
     {
