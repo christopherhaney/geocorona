@@ -1,15 +1,17 @@
-.paragraph {
-    width: 40%;
-    margin-left:2%;
-    h1 {
-        font-size: 32px;
-        font-weight: 900;
-        color: white;
-    }
-    
+.about {
+    margin-left: 0.5%;
     p {
+        display: inline-block;
         font-weight: 500;
         font-size: 22px;
         color: white;
+        width: 40%;
+        text-align: center;
+        vertical-align: top;
     }
+}
+
+img.aboutImages {
+    padding-right: 1%;
+    padding-bottom: 2%;
 }
