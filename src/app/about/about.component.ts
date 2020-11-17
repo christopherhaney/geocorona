@@ -15,8 +15,8 @@ export class AboutComponent implements OnInit {
   + "He currently works at Micron Technology as a software engineer. "
   + "He likes to DJ and play Super Smash Bros. Ultimate in his spare time!"
 
-  rossParagraph = "Ross McCusker is a recent graduate with a Bachelor's in Computer Science from Boise State University. " +
-                  "He currently works at HP as a software engineer and likes art, watching movies, and robots."
+  rossParagraph = "Ross McCusker is a recent graduate with a Bachelor's in Computer Science from Boise State University. " 
+  + "He currently works at HP as a software engineer and likes art, watching movies, and robots."
 
   devList = [
     {
