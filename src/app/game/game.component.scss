@@ -1,7 +1,8 @@
 html {
     overflow: auto;
     margin: 0px; 
-    padding: 0px; 
+    padding: 0px;
+    width: 100%; 
     height: 100%; 
     border: none;
     iframe {
@@ -9,7 +10,7 @@ html {
         width: 100%; 
         height: 1000px;
         border: none; 
-        overflow-y: auto; 
+        overflow-y: hidden; 
         overflow-x: hidden;
     }
 }

@@ -314,6 +314,14 @@ function Render() {
     if (asteroids.length !== 0) {
         for(let k = 0; k < asteroids.length; k++){
             if(CircleCollision(ship.x, ship.y, 11, asteroids[k].x, asteroids[k].y, asteroids[k].collisionRadius)){
+                if(game_over == 0) {
+                    for(let i = 0; i < asteroids.length; i++) {
+                        if(!(asteroids[i].x < (canvasWidth/2) - asteroids[i].collisionRadius - 50 || asteroids[i].x > (canvasWidth/2) + asteroids[i].collisionRadius + 50)) {
+                            asteroids[i].x += 200;
+                            asteroids[i].y += 200;
+                        } 
+                    }
+                }
                 ship.x = canvasWidth / 2;
                 ship.y = canvasHeight / 2;
                 ship.velX = 0;
@@ -395,7 +403,7 @@ function restart() {
         for(let i = 0; i < 10; i++){
             asteroids.push(new Asteroid());
         }
-    document.body.addEventListener("keydown", HandleKeyDown);
-    document.body.addEventListener("keyup", HandleKeyUp);
+        document.body.addEventListener("keydown", HandleKeyDown);
+        document.body.addEventListener("keyup", HandleKeyUp);
     }
 }
