@@ -19,7 +19,13 @@ export class AppComponent implements OnInit {
 
   public videoEvent(tabChangeEvent: MatTabChangeEvent) {
     var vid = <HTMLVideoElement>(document.getElementById("myVideo"));
-    if(tabChangeEvent.index == 1) { vid.pause(); } 
-    else { vid.play(); }
+    if(tabChangeEvent.index == 1) { 
+      vid.pause(); 
+      vid.style.display = "none";
+    } 
+    else { 
+      vid.style.display = "block";
+      vid.play(); 
+    }
   }
 }

@@ -1,3 +1,8 @@
+html {
+    background-color: black;
+    z-index: -200;
+}
+
 .spinner {
     display: flex;
     height: 100%;
@@ -11,15 +16,15 @@
     right: 0;
     bottom: 0;
     left: 0;
-    overflow: hidden;
-    z-index: -100;
+    //z-index: -100;
+    background-color: black;
 }
 
 #myVideo {
-    overflow: hidden;
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
     min-width: 100%;
     min-height: 100%;
 }
